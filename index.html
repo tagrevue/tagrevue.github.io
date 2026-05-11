@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAG REVUE — Langage & Algorithme </title>
+<meta name="description" content="Une revue d'actualité sur le langage à travers l'algorithme. Archive imprimée de la réaction collective face aux événements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #D92B2B;
+  --blue: #0000FF;
+  --black: #111111;
+  --gd: #444444;
+  --gm: #888888;
+  --gl: #CCCCCC;
+  --gbg: #F2F2F2;
+  --white: #FFFFFF;
+  --f: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--white); color:var(--black); font-family:var(--f); font-size:16px; line-height:1.5; overflow-x:hidden; }
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+/* ── HEADER ── */
+.site-header {
+  position:sticky; top:0; z-index:200;
+  background:var(--white);
+  border-bottom:1px solid var(--black);
+  padding:13px 40px;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; gap:20px;
+}
+.sh-logo { font-size:13px; font-weight:900; letter-spacing:0.06em; text-transform:uppercase; }
+.sh-mid { text-align:center; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gm); }
+.sh-right { text-align:left; }
+.sh-cta {
+  display:inline-block; font-size:10px; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase;
+  border:1px solid var(--black); padding:7px 16px;
+  text-decoration:none; color:var(--black);
+  transition:background .2s, color .2s;
+}
+.sh-cta:hover { background:var(--black); color:var(--white); }
+
+/* ── HERO ── */
+.hero {
+  padding:96px 40px 80px;
+  border-bottom:1px solid var(--gl);
+  max-width:1120px; margin:0 auto;
+  display:grid; grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr); gap:64px; align-items:center;
+  position:relative; overflow:hidden;
+}
+.hero-bg-num {
+  position:absolute; right:-20px; top:12px;
+  font-size:clamp(140px, 22vw, 300px); font-weight:900;
+  line-height:0.85; letter-spacing:-0.06em;
+  color:#f4f4f4; pointer-events:none; z-index:0; user-select:none;
+}
+.hero-left { position:relative; z-index:1; }
+.hero-kicker {
+  font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--red); font-weight:700; margin-bottom:20px;
+}
+.hero-title {
+  font-size:clamp(40px, 5vw, 70px);
+  font-weight:300; line-height:0.98;
+  letter-spacing:-0.04em; margin-bottom:22px;
+  max-width:640px;
+}
+.hero-title strong { font-weight:900; display:block; }
+.hero-lead {
+  font-size:16px; line-height:1.8; color:var(--gd);
+  font-weight:300; max-width:520px; margin-bottom:36px;
+}
+.hero-tags { display:flex; gap:8px; flex-wrap:wrap; }
+.tag {
+  font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+  border:1px solid var(--gl); padding:5px 12px;
+  color:var(--gm); font-weight:700;
+}
+.tag-r { border-color:var(--red); color:var(--red); }
+.tag-b { border-color:var(--blue); color:var(--blue); }
+
+/* ── A5 COVER MOCKUP ── */
+.hero-right { position:relative; z-index:1; display:flex; justify-content:flex-start; align-items:center; }
+.book-stage {
+  background:radial-gradient(circle at 35% 35%, #171717 0%, #090909 60%, #000 100%);
+  border-radius:10px; padding:28px 30px 30px; width:100%; max-width:430px;
+  min-height:520px; display:flex; align-items:center; justify-content:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+}
+.book-wrap {
+  position:relative; width:290px;
+  filter:drop-shadow(0 34px 40px rgba(0,0,0,.65));
+  transform:perspective(1100px) rotateX(12deg) rotateY(-22deg) rotateZ(-4deg);
+  transition:transform .4s ease;
+}
+.book-wrap:hover { transform:perspective(1100px) rotateX(10deg) rotateY(-16deg) rotateZ(-3deg); }
+.book-spine {
+  position:absolute; left:-18px; top:10px; bottom:6px; width:20px;
+  background:#0b32db; border-right:1px solid rgba(0,0,0,.28);
+  box-shadow:inset -1px 0 0 rgba(255,255,255,.18);
+}
+.book-cover {
+  background:#0536f5; width:100%; aspect-ratio:148/210;
+  position:relative; overflow:hidden; display:flex; flex-direction:column;
+  padding:20px 20px 18px 20px; border-radius:2px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.18);
+}
+.bc-header {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:rgba(0,0,0,.72);
+}
+.bc-num { font-size:18px; font-weight:900; letter-spacing:-0.04em; }
+.bc-pattern {
+  flex:1; overflow:hidden; position:relative;
+  display:flex; flex-direction:column; justify-content:flex-start;
+  margin-top:14px;
+}
+.bc-stack {
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:clamp(52px, 4.8vw, 72px); line-height:0.88;
+  letter-spacing:-0.055em; color:#020202; font-weight:400;
+}
+.bc-side-note {
+  position:absolute; left:0; bottom:18px; max-width:120px;
+  font-size:10px; line-height:1.2; color:rgba(0,0,0,.75);
+  text-transform:uppercase; letter-spacing:0.04em; font-weight:700;
+}
+.bc-foot {
+  padding-top:14px;
+  font-size:9px; letter-spacing:0.12em; text-transform:uppercase;
+  color:rgba(0,0,0,.55); display:flex; justify-content:space-between;
+  border-top:1px solid rgba(0,0,0,.15);
+}
+/* ── STATS BAR ── */
+.stats-bar {
+  display:grid; grid-template-columns:repeat(5,1fr);
+  border-bottom:1px solid var(--gl);
+  border-top:1px solid var(--gl);
+  max-width:1120px; margin:0 auto;
+}
+.stat-c {
+  padding:30px 28px; border-right:1px solid var(--gl);
+  text-align:left;
+}
+.stat-c:last-child { border-right:none; }
+.stat-n { font-size:clamp(24px,3vw,40px); font-weight:900; line-height:1; letter-spacing:-0.02em; }
+.stat-n.r { color:var(--black); }
+.stat-n.b { color:var(--black); }
+.stat-l { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gm); margin-top:8px; font-weight:700; }
+.stat-s { font-size:11px; color:var(--gm); margin-top:4px; line-height:1.45; }
+
+/* ── SECTION LABEL ── */
+.sec {
+  padding:10px 40px; background:var(--gbg);
+  border-top:1px solid var(--gl); border-bottom:1px solid var(--gl);
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gm);
+}
+.sec strong { color:var(--black); }
+
+/* ── MANIFESTE ── */
+.manifeste {
+  padding:80px 40px; max-width:1120px; margin:0 auto;
+  border-bottom:1px solid var(--gl);
+  display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:start;
+}
+.mf-label { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gm); font-weight:700; padding-top:6px; }
+.mf-content {}
+.mf-title {
+  font-size:clamp(22px,3vw,38px); font-weight:300; line-height:1.15;
+  letter-spacing:-0.02em; margin-bottom:28px;
+}
+.mf-title strong { font-weight:900; }
+.mf-body { font-size:15px; line-height:1.85; color:var(--gd); font-weight:300; margin-bottom:32px; }
+.mf-concepts {
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+  border:1px solid var(--gl);
+}
+.mc-item {
+  padding:18px 20px; border-right:1px solid var(--gl); border-bottom:1px solid var(--gl);
+  font-size:13px; line-height:1.6; color:var(--gd);
+}
+.mc-item:nth-child(2n) { border-right:none; }
+.mc-item:nth-last-child(-n+2) { border-bottom:none; }
+.mc-arrow { color:var(--red); font-weight:700; margin-right:6px; }
+
+/* ── ISSUES GRID ── */
+.issues { padding:64px 40px; max-width:1120px; margin:0 auto; border-bottom:1px solid var(--gl); }
+.issues-title { font-size:22px; font-weight:700; margin-bottom:6px; }
+.issues-sub { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gm); font-weight:600; margin-bottom:40px; }
+.issues-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--gl); border:1px solid var(--gl); }
+.issue-card { background:var(--white); padding:0; overflow:hidden; cursor:pointer; }
+.issue-card:hover .ic-cover { transform:scale(1.02); }
+.ic-cover {
+  height:180px; display:flex; flex-direction:column;
+  justify-content:space-between; padding:18px; position:relative;
+  overflow:hidden; transition:transform .3s ease;
+}
+.ic-cover.black { background:var(--black); }
+.ic-cover.red { background:var(--red); }
+.ic-cover.blue { background:var(--blue); }
+.ic-cover.grey { background:#1a1a1a; }
+.ic-cover.alarm { background:#111; border-left:4px solid var(--red); }
+.ic-num { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; opacity:.5; }
+.ic-num.w { color:var(--white); }
+.ic-big-num {
+  position:absolute; right:-10px; bottom:-20px;
+  font-size:100px; font-weight:900; line-height:0.8;
+  letter-spacing:-0.05em; opacity:0.08; color:var(--white);
+}
+.ic-title { font-size:16px; font-weight:900; line-height:1.1; z-index:1; position:relative; }
+.ic-title.w { color:var(--white); }
+.ic-body { padding:16px 18px; }
+.ic-hashtag { font-size:10px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; color:var(--gm); margin-bottom:6px; }
+.ic-desc { font-size:12px; line-height:1.6; color:var(--gd); }
+.ic-badge {
+  display:inline-block; margin-top:10px;
+  font-size:9px; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; padding:3px 8px; border:1px solid var(--gl);
+  color:var(--gm);
+}
+.ic-badge.coming { border-color:var(--red); color:var(--red); }
+
+/* ── DOUBLE PAGE SPREAD MOCKUP ── */
+.spread-section { padding:64px 40px; max-width:1120px; margin:0 auto; border-bottom:1px solid var(--gl); }
+.spread-title { font-size:22px; font-weight:700; margin-bottom:6px; }
+.spread-sub { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gm); font-weight:600; margin-bottom:36px; }
+.spread-wrap {
+  position:relative; border:1px solid var(--gl);
+  filter:drop-shadow(0 16px 40px rgba(0,0,0,.12));
+}
+.spread-book {
+  display:grid; grid-template-columns:1fr 1fr;
+  background:var(--white); gap:0;
+}
+.spread-gutter { width:3px; background:linear-gradient(to right, rgba(0,0,0,.12), rgba(0,0,0,.04), rgba(0,0,0,.12)); position:absolute; left:50%; top:0; bottom:0; transform:translateX(-50%); z-index:10; }
+.sp-left, .sp-right {
+  padding:28px 30px; min-height:360px; position:relative; overflow:hidden;
+}
+.sp-left { border-right:1px solid var(--gl); }
+.sp-header { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gm); font-weight:700; margin-bottom:20px; border-bottom:0.5px solid var(--gl); padding-bottom:8px; display:flex; justify-content:space-between; }
+.sp-tweet-main { margin-bottom:16px; }
+.sp-handle { font-size:11px; font-weight:700; color:var(--black); margin-bottom:4px; }
+.sp-text { font-size:13px; line-height:1.65; color:var(--black); margin-bottom:8px; }
+.sp-meta { font-size:9px; color:var(--gm); letter-spacing:0.06em; }
+.sp-stat-box { background:var(--gbg); padding:16px; margin:14px 0; }
+.sp-stat-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:0.5px solid var(--gl); font-size:11px; }
+.sp-stat-row:last-child { border-bottom:none; }
+.sp-stat-label { color:var(--gm); }
+.sp-stat-val { font-weight:700; }
+.sp-stat-val.r { color:var(--red); }
+.sp-stat-val.b { color:var(--blue); }
+.sp-chart { margin:14px 0; }
+.sp-bar-row { display:grid; grid-template-columns:110px 1fr 40px; gap:8px; align-items:center; margin:4px 0; }
+.sp-bar-label { font-size:10px; color:var(--gm); text-align:right; font-weight:600; }
+.sp-bar-t { height:4px; background:var(--gbg); }
+.sp-bar-f { height:100%; }
+.sp-bar-f.r { background:var(--red); }
+.sp-bar-f.b { background:var(--blue); }
+.sp-bar-f.bk { background:var(--black); }
+.sp-bar-v { font-size:10px; font-weight:700; }
+.sp-replies { }
+.sp-reply { border-top:0.5px solid var(--gl); padding:6px 0; font-size:10px; line-height:1.55; color:var(--gd); }
+.sp-reply-h { font-size:9px; font-weight:700; color:var(--gm); margin-bottom:2px; letter-spacing:0.06em; text-transform:uppercase; }
+.sp-pn { font-size:9px; color:var(--gm); position:absolute; bottom:14px; }
+.sp-pn-l { left:30px; }
+.sp-pn-r { right:30px; }
+
+/* ── METHODE ── */
+.methode {
+  padding:72px 40px; max-width:1120px; margin:0 auto;
+  border-bottom:1px solid var(--gl);
+}
+.m-title { font-size:22px; font-weight:700; margin-bottom:6px; }
+.m-sub { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gm); font-weight:600; margin-bottom:40px; }
+.m-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--gl); border:1px solid var(--gl); }
+.m-block { background:var(--white); padding:32px 28px; }
+.m-pct { font-size:44px; font-weight:900; line-height:1; letter-spacing:-0.03em; margin-bottom:14px; }
+.m-pct.r { color:var(--red); }
+.m-pct.b { color:var(--blue); }
+.m-pct.bk { color:var(--black); }
+.m-h { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; }
+.m-p { font-size:13px; line-height:1.7; color:var(--gd); font-weight:300; }
+
+/* ── ALARM PHONE PREVIEW ── */
+.alarm-section {
+  padding:64px 40px; max-width:1120px; margin:0 auto;
+  border-bottom:1px solid var(--gl);
+  display:grid; grid-template-columns:2fr 1fr; gap:60px; align-items:start;
+}
+.alarm-left {}
+.alarm-kicker { font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--red); font-weight:700; margin-bottom:16px; }
+.alarm-title { font-size:clamp(22px,3vw,36px); font-weight:300; line-height:1.1; letter-spacing:-0.02em; margin-bottom:20px; }
+.alarm-title strong { font-weight:900; }
+.alarm-lead { font-size:14px; line-height:1.8; color:var(--gd); font-weight:300; margin-bottom:28px; }
+.alarm-tweets {}
+.alarm-tweet {
+  padding:12px 0; border-top:0.5px solid var(--gl);
+  font-size:12px; line-height:1.6; color:var(--gd);
+}
+.alarm-tweet:first-child { border-top:none; }
+.at-meta { font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gm); margin-bottom:4px; }
+.at-body { color:var(--black); }
+.alarm-right {}
+.alarm-stats { border:1px solid var(--gl); }
+.as-title { padding:12px 16px; background:var(--gbg); border-bottom:1px solid var(--gl); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; color:var(--gm); }
+.as-item { padding:14px 16px; border-bottom:1px solid var(--gl); display:flex; justify-content:space-between; align-items:center; }
+.as-item:last-child { border-bottom:none; }
+.as-label { font-size:12px; color:var(--gd); }
+.as-val { font-size:16px; font-weight:900; }
+.as-val.r { color:var(--red); }
+.as-val.b { color:var(--blue); }
+
+/* ── BLACK BOX ── */
+.black-box {
+  background:var(--black); color:var(--white);
+  padding:60px 40px; text-align:left;
+}
+.bb-label { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,.35); font-weight:700; margin-bottom:20px; }
+.bb-title {
+  font-size:clamp(26px,4vw,54px); font-weight:300; line-height:1.1;
+  letter-spacing:-0.025em; max-width:800px; margin:0 0 24px;
+}
+.bb-title strong { font-weight:900; }
+.bb-body { font-size:15px; line-height:1.8; color:rgba(255,255,255,.5); max-width:640px; margin:0 0 36px; font-weight:300; }
+.bb-body strong { color:var(--white); }
+.bb-contact {
+  display:inline-block; border:1px solid rgba(255,255,255,.3);
+  padding:14px 32px; font-size:11px; letter-spacing:0.14em;
+  text-transform:uppercase; font-weight:700; color:var(--white);
+  text-decoration:none; transition:background .2s, border-color .2s;
+}
+.bb-contact:hover { background:var(--white); color:var(--black); }
+
+/* ── FOOTER ── */
+.site-footer {
+  padding:32px 40px;
+  border-top:1px solid var(--black);
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  align-items:start; gap:20px;
+  font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gm);
+  text-align:left;
+}
+.sf-mid { text-align:left; }
+.sf-right { text-align:left; }
+.sf-logo { font-size:12px; font-weight:900; color:var(--black); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) {
+  .site-header { padding:12px 20px; }
+  .sh-mid { display:none; }
+  .hero { grid-template-columns:1fr; padding:56px 20px 40px; gap:40px; }
+  .hero-bg-num { display:none; }
+  .book-stage { min-height:360px; max-width:100%; padding:18px; }
+  .book-wrap { width:210px; }
+  .stats-bar { grid-template-columns:1fr 1fr; }
+  .manifeste { grid-template-columns:1fr; padding:48px 20px; gap:24px; }
+  .mf-concepts { grid-template-columns:1fr; }
+  .mc-item { border-right:none !important; }
+  .mc-item:nth-last-child(-n+2) { border-bottom:1px solid var(--gl) !important; }
+  .mc-item:last-child { border-bottom:none !important; }
+  .issues { padding:48px 20px; }
+  .issues-grid { grid-template-columns:1fr 1fr; }
+  .spread-section { padding:48px 20px; }
+  .spread-book { grid-template-columns:1fr; }
+  .sp-right { display:none; }
+  .spread-gutter { display:none; }
+  .methode { padding:48px 20px; }
+  .m-grid { grid-template-columns:1fr; }
+  .alarm-section { grid-template-columns:1fr; padding:48px 20px; gap:32px; }
+  .black-box { padding:48px 20px; }
+  .site-footer { grid-template-columns:1fr; text-align:left; gap:8px; }
+  .sf-mid, .sf-right { text-align:left; }
+  .sec { padding:10px 20px; }
+}
+.issues-list{
+  padding:56px 40px;
+  border-bottom:1px solid var(--gl);
+}
+
+.article-issues{
+  margin-top:28px;
+  border-top:1px solid var(--black);
+}
+
+.article-issue{
+  display:grid;
+  grid-template-columns:90px minmax(0,1fr) 280px;
+  gap:28px;
+  padding:28px 0;
+  border-bottom:1px solid var(--gl);
+  align-items:start;
+}
+
+.article-issue.is-current{
+  border-top:3px solid var(--red);
+  background:linear-gradient(90deg, rgba(217,43,43,.055), transparent 55%);
+  padding-left:18px;
+  padding-right:18px;
+}
+
+.ai-index{
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:800;
+  color:var(--red);
+}
+
+.ai-theme{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--gm);
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.article-issue h3{
+  font-size:clamp(24px,3vw,42px);
+  line-height:1.08;
+  letter-spacing:-.025em;
+  font-weight:300;
+  max-width:820px;
+  margin:0 0 16px;
+}
+
+.article-issue h3 strong{
+  font-weight:900;
+}
+
+.article-issue p{
+  font-size:14px;
+  line-height:1.75;
+  color:var(--gd);
+  font-weight:300;
+  max-width:780px;
+  margin:0;
+}
+
+.ai-data{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:flex-start;
+}
+
+.ai-data span{
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--black);
+  border:1px solid var(--gl);
+  padding:5px 10px;
+  background:var(--white);
+}
+
+.article-issue.is-current .ai-data span:first-child,
+.article-issue.is-current .ai-index{
+  color:var(--red);
+}
+
+@media(max-width:900px){
+  .issues-list{
+    padding-left:22px;
+    padding-right:22px;
+  }
+
+  .article-issue{
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:26px 0;
+  }
+
+  .article-issue.is-current{
+    padding-left:14px;
+    padding-right:14px;
+  }
+
+  .ai-data{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+}
+
+/* ── REAL DOUBLE PAGE / ALARM PHONE EXTRACT ── */
+.real-spread-section .spread-wrap{background:var(--white);}
+.real-spread-book .real-page{min-height:610px;padding:24px 26px 34px;}
+.real-kicker{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:800;margin-bottom:10px;}
+.real-sp-title{font-size:clamp(22px,2.6vw,34px);line-height:1.03;letter-spacing:-.03em;font-weight:300;margin:0 0 12px;}
+.real-sp-title strong{font-weight:900;}
+.real-lead{font-size:11px;line-height:1.65;color:var(--gd);font-weight:300;max-width:420px;margin-bottom:14px;}
+.real-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--gl);margin:14px 0 16px;}
+.real-stat-grid div{padding:10px 8px;border-right:1px solid var(--gl);min-height:64px;}
+.real-stat-grid div:last-child{border-right:none;}
+.real-stat-grid b{display:block;font-size:24px;line-height:1;font-weight:900;letter-spacing:-.03em;color:var(--black);}
+.real-stat-grid div:nth-child(3) b,.real-stat-grid div:nth-child(4) b{color:var(--red);}
+.real-stat-grid span{display:block;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--gm);font-weight:800;margin-top:6px;line-height:1.25;}
+.real-map-card{border:1px solid var(--gl);background:var(--gbg);margin-bottom:14px;}
+.real-map-title{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding:9px 10px;border-bottom:1px solid var(--gl);}
+.real-map-title span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;}
+.real-map-title em{font-style:normal;font-size:8px;color:var(--gm);letter-spacing:.06em;text-transform:uppercase;text-align:right;}
+.real-map{height:178px;position:relative;overflow:hidden;background:
+  linear-gradient(135deg, rgba(0,0,0,.045) 0 25%, transparent 25% 100%),
+  radial-gradient(circle at 48% 58%, rgba(217,43,43,.07), transparent 34%),
+  radial-gradient(circle at 28% 58%, rgba(0,0,255,.055), transparent 30%),
+  #f7f7f7;
+}
+.real-map:before{content:"";position:absolute;left:0;right:0;top:42%;height:1px;background:rgba(0,0,0,.12);}
+.real-map:after{content:"";position:absolute;left:14%;right:8%;top:18%;bottom:15%;border:1px dashed rgba(0,0,0,.12);border-radius:55% 45% 50% 40%;transform:rotate(-4deg);}
+.real-sea-label{position:absolute;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.24);font-weight:900;}
+.real-sea-label.med{left:42%;top:44%;}
+.real-sea-label.atl{left:7%;top:55%;}
+.real-route-line{position:absolute;height:0;border-top:1px solid rgba(217,43,43,.45);transform-origin:left center;}
+.real-route-line.western{left:30%;top:72%;width:26%;transform:rotate(-19deg);border-color:rgba(26,111,168,.45);}
+.real-route-line.central{left:59%;top:58%;width:20%;transform:rotate(-32deg);}
+.real-map-dot{position:absolute;width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(0,0,0,.13);transform:translate(-50%,-50%);z-index:4;}
+.real-map-legend{display:flex;gap:10px;flex-wrap:wrap;padding:8px 10px;background:var(--white);border-top:1px solid var(--gl);}
+.real-map-legend span{font-size:8px;color:var(--gm);letter-spacing:.04em;text-transform:uppercase;font-weight:800;display:flex;align-items:center;gap:5px;}
+.real-map-legend i{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
+.real-sample{border-top:1px solid var(--gl);padding-top:9px;}
+.real-sample-meta{font-size:8px;color:var(--gm);font-weight:900;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px;}
+.real-sample-body{font-size:10.5px;line-height:1.55;color:var(--black);font-weight:300;}
+.real-sample-body mark{background:none;color:var(--red);font-weight:800;}
+.real-sample-eng{font-size:8px;color:var(--gm);margin-top:6px;letter-spacing:.08em;text-transform:uppercase;}
+.real-columns{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:14px;}
+.real-mini-title{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.real-bar-row{display:grid;grid-template-columns:54px 1fr 24px;gap:7px;align-items:center;margin-bottom:6px;}
+.real-bar-row.compact{grid-template-columns:72px 1fr 20px;}
+.real-bar-lbl{font-size:8.5px;color:var(--gm);font-weight:800;text-align:right;line-height:1.1;}
+.real-bar-track{height:5px;background:var(--gbg);position:relative;overflow:hidden;}
+.real-bar-fill{height:100%;background:var(--black);}
+.real-bar-fill.r{background:var(--red);}
+.real-bar-fill.b{background:var(--blue);}
+.real-bar-val{font-size:9px;font-weight:900;color:var(--black);text-align:right;}
+.real-bar-note{grid-column:2/4;font-size:7.5px;color:var(--gm);letter-spacing:.05em;text-transform:uppercase;margin-top:-4px;}
+.real-black-note{background:var(--black);color:rgba(255,255,255,.78);padding:12px 14px;font-size:10.5px;line-height:1.55;font-weight:300;margin:12px 0;}
+.real-black-note strong{color:var(--white);}
+.real-word-treemap{display:flex;flex-wrap:wrap;gap:1px;background:var(--gl);border:1px solid var(--gl);height:142px;overflow:hidden;}
+.real-word{background:var(--black);color:var(--white);padding:7px 8px;display:flex;flex-direction:column;justify-content:space-between;min-width:58px;flex-grow:1;}
+.real-word.is-red{background:var(--red);}
+.real-word b{font-size:10px;line-height:1.05;}
+.real-word span{font-size:15px;font-weight:900;opacity:.75;line-height:1;}
+.real-timeline{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;height:92px;align-items:end;border-left:1px solid var(--gl);border-bottom:1px solid var(--gl);padding:0 0 16px 4px;margin-top:4px;}
+.real-tl-item{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;position:relative;}
+.real-tl-bar{width:100%;min-height:4px;background:#888;}
+.real-tl-bar.peak{background:var(--red);}
+.real-tl-val{font-size:8px;font-weight:900;color:var(--black);line-height:1;margin-top:3px;}
+.real-tl-lbl{position:absolute;bottom:-15px;font-size:7px;letter-spacing:.05em;color:var(--gm);font-weight:800;text-transform:uppercase;}
+.real-note{font-size:9px;color:var(--gm);line-height:1.45;margin-top:18px;}
+@media(max-width:900px){
+  .real-spread-book .real-page{min-height:auto;}
+  .real-stat-grid{grid-template-columns:repeat(2,1fr);}
+  .real-stat-grid div{border-bottom:1px solid var(--gl);}
+  .real-stat-grid div:nth-child(2n){border-right:none;}
+  .real-columns{grid-template-columns:1fr;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="sh-logo">TAG REVUE</div>
+  <div class="sh-mid">Langage · Algorithme · Forme</div>
+  <div class="sh-right">
+    <a href="mailto:servicescartographiques@protonmail.com" class="sh-cta">Nous écrire</a>
+  </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<section style="border-bottom:1px solid var(--gl); overflow:hidden;">
+<div class="hero reveal">
+  <div class="hero-bg-num">TAG</div>
+  <div class="hero-left">
+    <div class="hero-kicker">N°01 EN COURS DE DÉVELOPPEMENT</div>
+    <h1 class="hero-title">
+      Cartographier les langages du flux.
+      <strong>Imprimer les conflits d'idées.</strong>
+    </h1>
+    <p class="hero-lead">
+      TAG REVUE transforme les réactions collectives aux événements contemporains en objets éditoriaux imprimés et numériques. À partir de corpus issus du web, chaque numéro collecte les traces d'un débat public, les classe, les visualise et les interprète.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Data journalism</span>
+      <span class="tag tag-r">Archive imprimée</span>
+      <span class="tag tag-b">Design éditorial</span>
+      <span class="tag">Format A5</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="book-stage">
+      <div class="book-wrap">
+        <div class="book-spine"></div>
+        <div class="book-cover">
+          <div class="bc-header">
+            <span>TAG REVUE</span>
+            <span class="bc-num">01</span>
+          </div>
+          <div class="bc-pattern">
+            <div class="bc-stack">Mapping</div>
+            <div class="bc-stack">Public</div>
+            <div class="bc-stack">Language</div>
+            <div class="bc-side-note">archive imprimée des réactions collectives · web · langage · conflit</div>
+          </div>
+          <div class="bc-foot">
+            <span>Langage · Algorithme · Forme</span>
+            <span>2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div class="stats-bar reveal">
+  <div class="stat-c">
+    <div class="stat-n b">5</div>
+    <div class="stat-l">Numéros produits</div>
+    <div class="stat-s">Maquettes complètes · prêtes à l'impression</div>
+  </div>
+  <div class="stat-c">
+    <div class="stat-n r">+4 000</div>
+    <div class="stat-l">Tweets archivés</div>
+    <div class="stat-s">Sur Christo, Benzema, GIEC, Migrations</div>
+  </div>
+  <div class="stat-c">
+    <div class="stat-n">30/30/30</div>
+    <div class="stat-l">Format éditorial</div>
+    <div class="stat-s">Data brute · Analyse · Contributions &amp; Carto</div>
+  </div>
+  <div class="stat-c">
+    <div class="stat-n r">A5</div>
+    <div class="stat-l">Format imprimé</div>
+    <div class="stat-s">Print-ready · PDF · Tirage limité</div>
+  </div>
+  <div class="stat-c">
+    <div class="stat-n b">2025</div>
+    <div class="stat-l">1ère collaboration</div>
+    <div class="stat-s">Alarm Phone · Méditerranée · En cours</div>
+  </div>
+</div>
+
+<!-- ══ MANIFESTE ══ -->
+<div class="sec reveal"><strong>§ 01</strong> — Manifeste &nbsp;&nbsp; <span>Ce que nous faisons et pourquoi</span></div>
+<div class="manifeste reveal">
+  <div class="mf-label">Le projet</div>
+  <div class="mf-content">
+    <h2 class="mf-title">
+      Donner une forme figée<br>
+      <strong>à ce qui disparaît<br>dès qu'on l'a lu.</strong>
+    </h2>
+    <p class="mf-body">
+      <strong>TAG REVUE transforme les réactions collectives aux événements contemporains en objets éditoriaux imprimés et numériques.<br> </strong>
+ À partir de corpus issus du web — tweets, hashtags, fragments de discours, données ouvertes, liens, images, reprises médiatiques — chaque numéro collecte les traces d’un débat public, les classe, les visualise et les interprète.
+ <br>Entre data journalism, sociologie linguistique et approche forensis, TAG REVUE rend lisible ce que le flux algorithmique disperse : les mots, les affects, les récits, les conflits et les imaginaires politiques qui traversent les réseaux sociaux.<br> 
+La revue ne prétend pas mesurer l’opinion publique. Elle observe les formes de langage par lesquelles un événement est reçu, approprié, détourné ou contesté.<br> 
+Si le flux numérique donne l’impression d’un bruit permanent, il est aussi le lieu où s’écrit une part décisive de notre vie démocratique. <br>  Nous n’avons jamais autant écrit, réagi, débattu ; encore faut-il apprendre à lire les formes collectives de cette conflictualité.<br>
+<strong> Chaque numéro est une enquête sur les traces numériques d’un événement : une tentative de ralentir le flux, d’en cartographier les formes et de rendre lisible notre capacité collective à produire, déplacer et pratiquer le conflit d’idées.<br></strong>
+
+    </p>
+    <!-- <p class="mf-body">
+     La revue est politique par ses sujets, par son refus de la modération algorithmique, par sa décision d'imprimer ce que la plateforme aurait noyé. Le livre reste l'entité la plus sûre. Il est urgent d'en <strong>(re)faire le gardien de notre mémoire.</strong>
+    </p> -->
+    <div class="mf-concepts">
+      <div class="mc-item"><span class="mc-arrow">→</span>Traduire des réactions instantanées en forme figée et historique</div>
+      <div class="mc-item"><span class="mc-arrow">→</span>Éduquer à la valeur narrative de la data brute</div>
+      <div class="mc-item"><span class="mc-arrow">→</span>Questionner les réactions collectives à l'urgence</div>
+      <div class="mc-item"><span class="mc-arrow">→</span>Travailler sur les nouvelles formes de littérature algorithmique</div>
+      <div class="mc-item"><span class="mc-arrow">→</span>Conférer à un objet militant une forme visuellement viable</div>
+      <div class="mc-item"><span class="mc-arrow">→</span>Offrir une historicité au contenu vif propre au web</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MÉTHODE ══ -->
+<div class="sec reveal"><strong>§ 02</strong> Le Format &nbsp;&nbsp; <span>La structure 30/30/30</span></div>
+<div class="methode reveal">
+  <div class="m-title">Chaque numéro suit le même protocole.</div>
+  <div class="m-sub">Trois couches distinctes </div>
+  <div class="m-grid">
+    <div class="m-block">
+      <div class="m-pct r">30%</div>
+      <div class="m-h">Data brute</div>
+      <p class="m-p">Les chiffres tels qu'ils sont. Corpus de tweets classés, statistiques de tendance, nombre de mentions, fenêtre temporelle, géolocalisation. Aucune interprétation — seulement la donnée extraite par algorithmique d'un événement public.</p>
+    </div>
+    <div class="m-block" style="border-left:1px solid var(--gl);">
+      <div class="m-pct b">30%</div>
+      <div class="m-h">Analyse typologique</div>
+      <p class="m-p">Classification des registres de langage : indignation, humour, relai de presse, mémoire, tourisme, bruit de collecte. Visualisations, graphiques de distribution, cartographies des tensions sémantiques.</p>
+    </div>
+    <div class="m-block" style="border-left:1px solid var(--gl);">
+      <div class="m-pct bk">30%</div>
+      <div class="m-h">Contributions et analyse située &amp;</div>
+      <p class="m-p">Textes d'analyse signés, illustrations, diagrammes et cartographies. Des auteurices extérieur.es apportent une lecture critique. Le corpus devient un texte. La carte devient une preuve. L'archive devient de la littérature.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NUMÉROS ══ -->
+<!-- ══ NUMÉROS ══ -->
+<div class="sec reveal">
+  <strong>§ 03</strong> — Numéros &nbsp;&nbsp;
+  <span>10 maquettes produites · 1 en cours</span>
+</div>
+
+<section class="issues-list reveal">
+  <div class="m-title" style="font-size:22px;margin-bottom:6px;">Les numéros</div>
+  <div class="issues-sub">Articles à découvrir · Hero-titles · Données collectées</div>
+
+  <div class="article-issues">
+
+    <!-- N°00 Alarm Phone -->
+    <article class="article-issue is-current">
+      <div class="ai-index">En cours</div>
+      <div class="ai-main">
+        <div class="ai-theme">Méditerranée · sauvetage · données géolocalisées</div>
+        <h3>293 alertes de détresse.<br><strong>Qui répond — et qui ne répond pas ?</strong></h3>
+        <p>Journal de bord des eaux méditerranéennes et atlantiques à partir des tweets @alarm_phone : appels, zones de départ, autorités alertées, attentes prolongées et pertes de contact.</p>
+      </div>
+      <div class="ai-data">
+        <span>293 tweets</span>
+        <span>Juil. 2025 → Avr. 2026</span>
+        <span>48 contacts perdus</span>
+        <span>57 attentes prolongées</span>
+      </div>
+    </article>
+
+    <!-- Christo -->
+    <article class="article-issue">
+      <div class="ai-index">01</div>
+      <div class="ai-main">
+        <div class="ai-theme">Patrimoine · art contemporain · mémoire nationale</div>
+        <h3>L’Arc emballé.<br><strong>Qui a le droit de toucher au monument ?</strong></h3>
+        <p>L’emballage de l’Arc de Triomphe devient une controverse sur la propriété symbolique du monument : expérience esthétique, atteinte au patrimoine, provocation de classe ou “non-œuvre”.</p>
+      </div>
+      <div class="ai-data">
+        <span>1 646 tweets uniques</span>
+        <span>01/10 → 20/10/2021</span>
+        <span>439 tweets cœur Christo</span>
+        <span>381 auteurs cœur</span>
+      </div>
+    </article>
+
+    <!-- COP26 -->
+    <article class="article-issue">
+      <div class="ai-index">02</div>
+      <div class="ai-main">
+        <div class="ai-theme">Climat · diplomatie · soupçon politique</div>
+        <h3>La COP comme machine à produire du doute.<br><strong>Promesses, texte final, soupçons.</strong></h3>
+        <p>Une fenêtre de clôture où la COP26 devient un conflit d’interprétation en temps réel : négociations finales, énergies fossiles, justice climatique, greenwashing et fatigue politique.</p>
+      </div>
+      <div class="ai-data">
+        <span>6 593 tweets</span>
+        <span>100 minutes</span>
+        <span>5 386 auteurs</span>
+        <span>5 206 liens</span>
+      </div>
+    </article>
+
+    <!-- GIEC -->
+    <article class="article-issue">
+      <div class="ai-index">03</div>
+      <div class="ai-main">
+        <div class="ai-theme">Science · institutions · traduction politique</div>
+        <h3>Le rapport du GIEC est public.<br><strong>Le conflit porte sur sa traduction politique.</strong></h3>
+        <p>Le rapport du GIEC est observé comme un objet politique en transit : preuve scientifique, ressource militante, cible climatosceptique, argument institutionnel et support de controverses locales.</p>
+      </div>
+      <div class="ai-data">
+        <span>2 898 tweets</span>
+        <span>9 jours</span>
+        <span>2 687 tweets FR</span>
+        <span>22 194 interactions</span>
+      </div>
+    </article>
+
+    <!-- Benzema -->
+    <article class="article-issue">
+      <div class="ai-index">04</div>
+      <div class="ai-main">
+        <div class="ai-theme">Sport · peuple · consécration collective</div>
+        <h3>Le Ballon d’Or du peuple.<br><strong>Un trophée individuel devient une propriété collective.</strong></h3>
+        <p>Le sacre de Karim Benzema déplace le Ballon d’Or hors de son cadre institutionnel : Lyon, peuple, Real Madrid, panthéon footballistique et mémoire polémique française.</p>
+      </div>
+      <div class="ai-data">
+        <span>1 223 tweets</span>
+        <span>1 085 comptes</span>
+        <span>847 réponses</span>
+        <span>285 liens</span>
+      </div>
+    </article>
+
+    <!-- Dembélé -->
+    <article class="article-issue">
+      <div class="ai-index">05</div>
+      <div class="ai-main">
+        <div class="ai-theme">Sport · PSG · diaspora · réhabilitation</div>
+        <h3>Le Ballon d’Or ne clôt pas le débat.<br><strong>Il ouvre une bataille d’appropriation.</strong></h3>
+        <p>Le sacre d’Ousmane Dembélé fonctionne comme une machine de réécriture : blessures, irrégularité, victoire collective du PSG, duel avec Yamal et récits diasporiques.</p>
+      </div>
+      <div class="ai-data">
+        <span>1 120 tweets</span>
+        <span>705 liens</span>
+        <span>439 images</span>
+        <span>768 112 interactions</span>
+      </div>
+    </article>
+
+    <!-- Benzema / Dembélé -->
+    <article class="article-issue">
+      <div class="ai-index">06</div>
+      <div class="ai-main">
+        <div class="ai-theme">Comparaison · Ballons d’Or · fabrication publique</div>
+        <h3>Deux sacres français.<br><strong>Deux manières de fabriquer un vainqueur public.</strong></h3>
+        <p>Une lecture comparée de deux réceptions sportives : Benzema comme réparation, panthéon et retour territorial ; Dembélé comme réécriture biographique, PSG collectif et circulation diasporique.</p>
+      </div>
+      <div class="ai-data">
+        <span>Benzema : 1 223 tweets</span>
+        <span>Dembélé : 1 120 tweets</span>
+        <span>2022 : TXT</span>
+        <span>2025 : CSV</span>
+      </div>
+    </article>
+
+    <!-- Listenbourg -->
+    <article class="article-issue">
+      <div class="ai-index">07</div>
+      <div class="ai-main">
+        <div class="ai-theme">Mème · hoax · fiction collective</div>
+        <h3>Un pays qui n’existe pas.<br><strong>Une administration qui apparaît en temps réel.</strong></h3>
+        <p>Le Listenbourg est traité comme une infrastructure participative : carte, institutions, médias, économie, diplomatie, sport, marques et folklore national produits collectivement.</p>
+      </div>
+      <div class="ai-data">
+        <span>31 771 tweets étudiés</span>
+        <span>9 494 auteurs</span>
+        <span>5 150 médias</span>
+        <span>1 075 693 interactions</span>
+      </div>
+    </article>
+
+    <!-- Poutine -->
+    <article class="article-issue">
+      <div class="ai-index">08</div>
+      <div class="ai-main">
+        <div class="ai-theme">Guerre informationnelle · Ukraine · propagande</div>
+        <h3>Poutine n’est pas seulement un nom.<br><strong>C’est un distributeur de positions.</strong></h3>
+        <p>Le flux autour de “Poutine” met en scène une architecture de conflits : guerre, Occident, réseaux d’influence, peur nucléaire, propagande et bataille de légitimité médiatique.</p>
+      </div>
+      <div class="ai-data">
+        <span>11 785 tweets politiques</span>
+        <span>7 109 auteurs</span>
+        <span>1 974 liens</span>
+        <span>160 947 likes + RT</span>
+      </div>
+    </article>
+
+    <!-- Zemmour -->
+    <article class="article-issue">
+      <div class="ai-index">09</div>
+      <div class="ai-main">
+        <div class="ai-theme">Politique · pré-campagne · polémique industrielle</div>
+        <h3>Zemmour n’est pas seulement un candidat.<br><strong>C’est un accélérateur de bascule.</strong></h3>
+        <p>En moins de 24 heures, le flux enregistre une transition structurelle : meeting de Versailles, Thinkerview, Milipol, électeurs LR en rupture et candidature virtuelle déjà active.</p>
+      </div>
+      <div class="ai-data">
+        <span>23 378 tweets bruts</span>
+        <span>~950 tweets / heure</span>
+        <span>3 événements simultanés</span>
+        <span>Sondages : 17 %</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ══ DOUBLE PAGE SPREAD ══ -->
+<div class="sec reveal"><strong>§ 04</strong> — Aperçu &nbsp;&nbsp; <span>Double page · Monitoring Alarm Phone · Données réelles</span></div>
+<div class="spread-section reveal real-spread-section">
+  <div class="spread-title">À quoi ressemble une page d'analyse.</div>
+  <div class="spread-sub">Extrait réel · Numéro @alarm_phone · 293 tweets · Juil. 2025 → Avr. 2026</div>
+  <div class="spread-wrap">
+    <div class="spread-gutter"></div>
+    <div class="spread-book real-spread-book">
+
+      <!-- PAGE GAUCHE -->
+      <div class="sp-left real-page">
+        <div class="sp-header">
+          <span>TAG REVUE — @ALARM_PHONE</span>
+          <span>§ 01 · Corpus & carte</span>
+        </div>
+
+        <div class="real-kicker">Monitoring · juil. 2025 – avr. 2026</div>
+        <h3 class="real-sp-title">293 alertes de détresse.<br><strong>Qui répond — et qui ne répond pas ?</strong></h3>
+        <p class="real-lead">Corpus récupéré par algorithme : tweets datés, géolocalisés par mentions de lieux et hashtags, classés par routes, acteurs interpellés et issues documentaires.</p>
+
+        <div class="real-stat-grid">
+          <div><b>293</b><span>tweets récoltés</span></div>
+          <div><b>132</b><span>alertes géolocalisées</span></div>
+          <div><b>48</b><span>contacts perdus</span></div>
+          <div><b>57</b><span>attentes prolongées</span></div>
+        </div>
+
+        <div class="real-map-card">
+          <div class="real-map-title">
+            <span>Carte des alertes</span>
+            <em>points issus de la maquette · 132 alertes géolocalisées / 293</em>
+          </div>
+         <br>
+         <br>
+         <br>
+         <br>
+         <br>
+        <br>
+         <br>
+         <br>
+         <br>
+         
+        
+          <div class="real-map-legend">
+            <span><i style="background:#D92B2B"></i> Méditerranée centrale</span>
+            <span><i style="background:#1A6FA8"></i> Méditerranée occidentale</span>
+            <span><i style="background:#555"></i> Atlantique → Canaries</span>
+            <span><i style="background:#888"></i> Routes terrestres / Égée</span>
+          </div>
+        </div>
+
+        <div class="real-sample">
+          <div class="real-sample-meta">20 avr. 2026 · Méd. Occ. / Algérie → Espagne</div>
+          <div class="real-sample-body">🆘 in the Western Med! We were alerted to a boat with 19 people that left from Algeria towards Spain <mark>4 days ago</mark>. Relatives are getting more and more worried. We ask for rescue now!</div>
+          <div class="real-sample-eng">2 RT · 7 ♥ · #Algeria #Spain</div>
+        </div>
+
+        <span class="sp-pn sp-pn-l">4</span>
+      </div>
+
+      <!-- PAGE DROITE -->
+      <div class="sp-right real-page">
+        <div class="sp-header">
+          <span>§ 02 · Diagrammes réels</span>
+          <span>Fréquences · routes · lexique</span>
+        </div>
+
+        <div class="real-columns">
+          <div>
+            <div class="real-mini-title">Pays de départ</div>
+            <div class="real-bar-row">
+              <div class="real-bar-lbl">Libye</div>
+              <div class="real-bar-track"><div class="real-bar-fill r" style="width:100%"></div></div>
+              <div class="real-bar-val">47</div>
+              <div class="real-bar-note">Route centrale</div>
+            </div>
+            <div class="real-bar-row">
+              <div class="real-bar-lbl">Algérie</div>
+              <div class="real-bar-track"><div class="real-bar-fill b" style="width:91%"></div></div>
+              <div class="real-bar-val">43</div>
+              <div class="real-bar-note">Route occidentale</div>
+            </div>
+            <div class="real-bar-row">
+              <div class="real-bar-lbl">Tunisie</div>
+              <div class="real-bar-track"><div class="real-bar-fill" style="width:55%"></div></div>
+              <div class="real-bar-val">26</div>
+              <div class="real-bar-note">Route centrale</div>
+            </div>
+            <div class="real-bar-row">
+              <div class="real-bar-lbl">Atlantique</div>
+              <div class="real-bar-track"><div class="real-bar-fill" style="width:36%"></div></div>
+              <div class="real-bar-val">17</div>
+              <div class="real-bar-note">W. Afrique → Canaries</div>
+            </div>
+            <div class="real-bar-row">
+              <div class="real-bar-lbl">Bulgarie</div>
+              <div class="real-bar-track"><div class="real-bar-fill" style="width:19%"></div></div>
+              <div class="real-bar-val">9</div>
+              <div class="real-bar-note">Frontière terrestre</div>
+            </div>
+          </div>
+          <div>
+            <div class="real-mini-title">Autorités interpellées</div>
+            <div class="real-bar-row compact">
+              <div class="real-bar-lbl">EU / Europe</div>
+              <div class="real-bar-track"><div class="real-bar-fill r" style="width:100%"></div></div>
+              <div class="real-bar-val">33</div>
+            </div>
+            <div class="real-bar-row compact">
+              <div class="real-bar-lbl">Italie</div>
+              <div class="real-bar-track"><div class="real-bar-fill" style="width:61%"></div></div>
+              <div class="real-bar-val">20</div>
+            </div>
+            <div class="real-bar-row compact">
+              <div class="real-bar-lbl">Malta</div>
+              <div class="real-bar-track"><div class="real-bar-fill" style="width:36%"></div></div>
+              <div class="real-bar-val">12</div>
+            </div>
+            <div class="real-bar-row compact">
+              <div class="real-bar-lbl">Garde-côtes LY</div>
+              <div class="real-bar-track"><div class="real-bar-fill r" style="width:39%"></div></div>
+              <div class="real-bar-val">13</div>
+            </div>
+            <div class="real-bar-row compact">
+              <div class="real-bar-lbl">Garde-côtes TN</div>
+              <div class="real-bar-track"><div class="real-bar-fill r" style="width:21%"></div></div>
+              <div class="real-bar-val">7</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="real-black-note">
+          <strong>Signal 2025–26 :</strong> l’Algérie apparaît presque à parité avec la Libye dans le corpus. Le déplacement vers la Méditerranée occidentale devient visible dans la donnée, tandis que l’Union européenne reste l’acteur institutionnel le plus interpellé.
+        </div>
+
+        <div class="real-mini-title" style="margin-top:16px;">Ce que les tweets répètent</div>
+        <div class="real-word-treemap" role="img" aria-label="Treemap lexical du corpus Alarm Phone">
+          <div class="real-word" style="flex-basis:42.0%"><b>rescue</b><span>87</span></div>
+              <div class="real-word" style="flex-basis:32.3%"><b>authorities</b><span>67</span></div>
+              <div class="real-word" style="flex-basis:30.9%"><b>alerted</b><span>64</span></div>
+              <div class="real-word" style="flex-basis:23.7%"><b>distress</b><span>49</span></div>
+              <div class="real-word is-red" style="flex-basis:22.7%"><b>Libya</b><span>47</span></div>
+              <div class="real-word is-red" style="flex-basis:20.8%"><b>Algeria</b><span>43</span></div>
+              <div class="real-word is-red" style="flex-basis:18.3%"><b>missing / disparu</b><span>38</span></div>
+              <div class="real-word" style="flex-basis:18.0%"><b>EU / Europe</b><span>33</span></div>
+              <div class="real-word" style="flex-basis:18.0%"><b>Tunisia</b><span>26</span></div>
+              <div class="real-word" style="flex-basis:18.0%"><b>hours / jours</b><span>23</span></div>
+              <div class="real-word" style="flex-basis:18.0%"><b>Italy</b><span>20</span></div>
+              <div class="real-word" style="flex-basis:18.0%"><b>Atlantic</b><span>17</span></div>
+              <div class="real-word" style="flex-basis:18.0%"><b>Malta</b><span>12</span></div>
+              <div class="real-word is-red" style="flex-basis:18.0%"><b>SAR</b><span>8</span></div>
+              <div class="real-word is-red" style="flex-basis:18.0%"><b>coast guard</b><span>7</span></div>
+              <div class="real-word is-red" style="flex-basis:18.0%"><b>pushback</b><span>4</span></div>
+        </div>
+
+        <div class="real-mini-title" style="margin-top:16px;">Chronologie mensuelle des alertes</div>
+        <div class="real-timeline">
+          <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:21%"></div>
+              <div class="real-tl-val">11</div>
+              <div class="real-tl-lbl">Juil.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:58%"></div>
+              <div class="real-tl-val">30</div>
+              <div class="real-tl-lbl">Août</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:73%"></div>
+              <div class="real-tl-val">38</div>
+              <div class="real-tl-lbl">Sep.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar peak" style="height:100%"></div>
+              <div class="real-tl-val">52</div>
+              <div class="real-tl-lbl">Oct.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:62%"></div>
+              <div class="real-tl-val">32</div>
+              <div class="real-tl-lbl">Nov.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:63%"></div>
+              <div class="real-tl-val">33</div>
+              <div class="real-tl-lbl">Déc.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:60%"></div>
+              <div class="real-tl-val">31</div>
+              <div class="real-tl-lbl">Jan.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:44%"></div>
+              <div class="real-tl-val">23</div>
+              <div class="real-tl-lbl">Fév.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:52%"></div>
+              <div class="real-tl-val">27</div>
+              <div class="real-tl-lbl">Mar.</div>
+            </div>
+            <div class="real-tl-item">
+              <div class="real-tl-bar" style="height:31%"></div>
+              <div class="real-tl-val">16</div>
+              <div class="real-tl-lbl">Avr.*</div>
+            </div>
+        </div>
+        <div class="real-note">Pic en octobre 2025 : 52 alertes. Données avril 2026 partielles au moment de la récolte.</div>
+
+        <span class="sp-pn sp-pn-r">5</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ALARM PHONE SECTION ══ 
+<div class="sec reveal"><strong>§ 05</strong> — Collaboration &nbsp;&nbsp; <span>Numéro en cours · Alarm Phone</span></div>
+<div class="alarm-section reveal">
+  <div class="alarm-left">
+    <div class="alarm-kicker">Premier numéro en collaboration · 2025</div>
+    <h2 class="alarm-title">TAG REVUE &amp; <strong>Alarm Phone.</strong><br>La Méditerranée sous algorithme.</h2>
+    <p class="alarm-lead">
+      Alarm Phone documente depuis 2014 les traversées en Méditerranée et les appels de détresse. Ce corpus — signalements, tweets, données Frontex — devient le matériau du numéro 01. Première collaboration d'une série.
+    </p>
+    <div class="alarm-tweets">
+      <div class="alarm-tweet">
+        <div class="at-meta">#0001 · Thread de détresse · Mer Egée · 2023</div>
+        <div class="at-body">DISTRESS · 35 people on a rubber dinghy. Position 35.4°N / 26.1°E. Taking water. Coast Guard informed — no response after 90min. We need boats NOW. #Mediterranean</div>
+      </div>
+      <div class="alarm-tweet">
+        <div class="at-meta">#0087 · Réaction · FR · Opinion · engagement 1.4K</div>
+        <div class="at-body">Pendant que Frontex "surveille", 35 personnes se noient en direct sur Twitter avec leur position GPS. La technologie du surveillance sans la technologie du sauvetage. C'est un choix politique.</div>
+      </div>
+      <div class="alarm-tweet">
+        <div class="at-meta">#0142 · Institutionnel · EU Parliament</div>
+        <div class="at-body">MEP statement: "We call for an immediate EU response mechanism..." — 3 retweets, 0 replies from Frontex.</div>
+      </div>
+      <div class="alarm-tweet">
+        <div class="at-meta">#0311 · Bruit / politique FR · Droite</div>
+        <div class="at-body">On paie Frontex pour ça ? 340 millions d'euros pour regarder des caméras depuis Varsovie ? Mais bien sûr. #StopImmigration</div>
+      </div>
+    </div>
+  </div>
+  <div class="alarm-right">
+    <div class="alarm-stats">
+      <div class="as-title">Données du corpus · Estimation</div>
+      <div class="as-item"><span class="as-label">Tweets collectés</span><span class="as-val b">3 200+</span></div>
+      <div class="as-item"><span class="as-label">Langues identifiées</span><span class="as-val">14</span></div>
+      <div class="as-item"><span class="as-label">Fenêtre temporelle</span><span class="as-val">12 mois</span></div>
+      <div class="as-item"><span class="as-label">Décès documentés</span><span class="as-val r">2 500+</span></div>
+      <div class="as-item"><span class="as-label">Budget Frontex (réf.)</span><span class="as-val b">845M€</span></div>
+    </div>
+    <div style="margin-top:16px; padding:16px; border:1px solid var(--red); font-size:12px; line-height:1.65; color:var(--gd);">
+      <strong style="color:var(--black); display:block; margin-bottom:6px; font-size:10px; letter-spacing:.1em; text-transform:uppercase;">Note éditoriale</strong>
+      Ce numéro ne modère pas. Il archive. Les tweets sont reproduits dans leur intégralité, catégorisés par registre, horodatés. L'algorithme a sélectionné. TAG REVUE documente.
+    </div>
+  </div>
+</div> -->
+
+<!-- ══ BLACK BOX CTA ══ -->
+<div class="black-box reveal">
+  <div class="bb-label">Envie d'échanger? </div>
+  <a href="mailto:servicescartographiques@protonmail.com" class="bb-contact">Nous contacter</a>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <div>
+    <div class="sf-logo">TAG REVUE</div>
+    <div style="margin-top:4px;">Paris · France</div>
+  </div>
+  <div class="sf-mid">
+    <div>Langage · Algorithme</div>
+    <div style="margin-top:4px;">servicescartographiques@protonmail.com</div>
+  </div>
+  <div class="sf-right">
+    <div style="margin-top:4px; color:var(--black);">© Services Cartographiques - 2026</div>
+  </div>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+  },{threshold:0.08});
+  els.forEach(el=>io.observe(el));
+})();
+</script>
+
+</body>
+</html>
